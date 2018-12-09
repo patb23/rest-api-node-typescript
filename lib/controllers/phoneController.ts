@@ -12,7 +12,8 @@ export class PhoneController{
     }
 
     public get (req: Request, res: Response) {
-        console.log('get called');
+        console.log('get              called');
+        res.status(200).json({"status": "successful"});
     }
 
     public put (req: Request, res: Response) {

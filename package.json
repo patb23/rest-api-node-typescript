@@ -4,7 +4,7 @@
   "description": "An API built with NodeJS, Express, MongoDB and TypeScript",
   "main": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha dist/**/*.spec.js --recursive --reporter mocha-simple-html-reporter   --reporter-options output=report.html",
     "build": "tsc",
     "dev": "ts-node ./lib/server.ts",
     "start": "nodemon ./dist/server.js",
@@ -25,12 +25,14 @@
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
+    "@types/chai-http": "^3.0.5",
     "@types/mocha": "^5.2.5",
     "@types/sinon": "^5.0.7",
     "@types/sinon-chai": "^3.2.1",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "mocha": "^5.2.0",
+    "mocha-simple-html-reporter": "^1.1.0",
     "sinon": "^7.1.1",
     "sinon-chai": "^3.3.0",
     "sinon-mongoose": "^2.2.1"

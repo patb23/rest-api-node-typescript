@@ -8,6 +8,17 @@ import 'mocha';
 chai.use(chaiHttp);
 const expect = chai.expect;
 
+describe(' calls to the API endpoints ', ()=>{
+    it('get request is successful', ()=>{
+        chai.request(app).get('/partyP1234/phoneNumbers')
+            .end((err,res)=>{
+                expect(err).to.be.null;
+                expect(res.status).to.be.equal(200);
+            })
+
+    })
+
+})
 
 describe('relay the request to message broker', function () {
 
