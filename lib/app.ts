@@ -7,8 +7,8 @@ class App {
 
     public app: express.Application;
     public routePrv: Routes = new Routes();
-    // public mongoUrl: string = 'mongodb://localhost/CRMdb';  
-    public mongoUrl: string = 'mongodb://dalenguyen:123123@localhost:27017/CRMdb';
+    public mongoUrl: string = 'mongodb://localhost/twitter-feed';
+    // public mongoUrl: string = 'mongodb://dalenguyen:123123@localhost:27017/twitter-feed';
 
     constructor() {
         this.app = express();
@@ -26,7 +26,7 @@ class App {
 
     private mongoSetup(): void{
         mongoose.Promise = global.Promise;
-        mongoose.connect(this.mongoUrl);        
+        mongoose.connect(this.mongoUrl);
     }
 
 }

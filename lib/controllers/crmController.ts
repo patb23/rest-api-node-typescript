@@ -22,6 +22,7 @@ export class ContactController{
             if(err){
                 res.send(err);
             }
+            console.log(contact);
             res.json(contact);
         });
     }

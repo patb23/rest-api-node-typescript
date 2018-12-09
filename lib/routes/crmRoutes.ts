@@ -1,10 +1,13 @@
 import {Request, Response, NextFunction} from "express";
 import { ContactController } from "../controllers/crmController";
+import { PhoneController } from "../controllers/phoneController";
 
 export class Routes { 
     
-    public contactController: ContactController = new ContactController() 
-    
+    public contactController: ContactController = new ContactController();
+
+    public  phoneController : PhoneController =  new PhoneController();
+
     public routes(app): void {   
         
         app.route('/')
@@ -16,16 +19,7 @@ export class Routes {
         
         // Contact 
         app.route('/contact')
-        .get((req: Request, res: Response, next: NextFunction) => {
-            // middleware
-            console.log(`Request from: ${req.originalUrl}`);
-            console.log(`Request type: ${req.method}`);            
-            if(req.query.key !== '78942ef2c1c98bf10fca09c808d718fa3734703e'){
-                res.status(401).send('You shall not pass!');
-            } else {
-                next();
-            }                        
-        }, this.contactController.getContacts)        
+        .get(this.contactController.getContacts)
 
         // POST endpoint
         .post(this.contactController.addNewContact);
@@ -36,6 +30,15 @@ export class Routes {
         .get(this.contactController.getContactWithID)
         .put(this.contactController.updateContact)
         .delete(this.contactController.deleteContact)
+
+        app.route('/party:partyID/phoneNumbers')
+            .get(this.phoneController.get)
+            .post(this.phoneController.post)
+            .put(this.phoneController.put)
+
+        app.route('/party:partyID/phoneNumbers:phoneNumberID')
+            .patch(this.phoneController.patch)
+            .delete(this.phoneController.delete)
 
     }
 }

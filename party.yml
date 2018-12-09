@@ -1,0 +1,851 @@
+---
+
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/MyPru/Party/1.0.0
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/PruISG/Parties/1.0.0
+info:
+  description: Parties API
+  version: "1.0.0"
+  title: Parties API
+  contact:
+    email: api-support@prudential.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: developers
+    description: Operations available to developers
+paths:
+  /parties:
+    post:
+      tags:
+        - developers
+      summary: adds a party
+      operationId: addParty
+      description: Adds an party to the system
+      responses:
+        '201':
+          description: patry created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: party already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Party'
+        description: Party to add
+  '/parties{partyID}':
+    get:
+      tags:
+        - developers
+      summary: gets a party
+      operationId: getParty
+      description: |
+        By passing in the key of a party, you can reterive a party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Party'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party not found
+    put:
+      tags:
+        - developers
+      summary: replaces a party
+      operationId: setParty
+      description:
+        By passing in the key of a party, you can replace a party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Party'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/Party'
+    patch:
+      tags:
+        - developers
+      summary: updates a party
+      operationId: updateParty
+      description: |
+        By passing in the key of a party, you can update a party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Party'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/Party'
+    delete:
+      tags:
+        - developers
+      summary: delete a party
+      operationId: deleteParty
+      description: |
+        By passing in the key of a party, you can delete a party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Party'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party not found
+  '/parties{partyID}/phoneNumbers':
+    get:
+      tags:
+        - developers
+      summary: gets all phone numbers for the party
+      operationId: getPhoneNumbers
+      description: |
+        By passing in the key of a party , you can reterive a party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party whose phone numbers are requested
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation will result in returning list of all phone numbers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PhoneNumber'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party not found  #assumed phone numbers would be returned for all valid party
+    post:
+      tags:
+        - developers
+      summary: adds a phonenumber for the party
+      operationId: addParty
+      description: Adds an party to the system
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party for which the operation is performed
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: phonenumber added
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: phonenumber already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhoneNumber'
+        description: Phonenumber to add
+    put:
+      tags:
+        - developers
+      summary: replaces phone number
+      operationId: setPhoneNumber
+      description:
+        By passing in the key of a party , you can replace phone number for the party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: phone numbers replaced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Party'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhoneNumber'
+        description: Phonenumber to be replaced
+
+  '/parties{partyID}/phoneNumbers{phoneNumberID}':
+    patch:
+      tags:
+        - developers
+      summary: updates phone number for a party
+      operationId: updatePhoneNumber
+      description: |
+        By passing in the key of a party, you can update a party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: phoneNumberID
+          in: path
+          description: ID of phone that is being updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneNumber'
+        '400':
+          description: Invalid ID supplied for the Party
+        '404':
+          description: Party or the Phonenumber not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/PhoneNumber'
+    delete:
+      tags:
+        - developers
+      summary: delete a phoneNumber for the party identified by the party ID
+      operationId: deletePhoneNumber
+      description: |
+        By passing in the key of a party and for the phone number, you can delete a phone number belonging to the party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party for which the operation is performed
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: phoneNumberID
+          in: path
+          description: ID of phonenumber to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation will return list of all phonenumbers after deletion
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PhoneNumber'
+        '400':
+          description: Invalid ID supplied for either party or phone
+        '404':
+          description: Party or Phonenumber not found
+
+
+
+  '/parties{partyID}/addresses':
+    get:
+      tags:
+        - developers
+      summary: gets all addresss for the party
+      operationId: getAddresses
+      description: |
+        By passing in the key of a party , you can reterive a party addresses
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party whose addresses are requested
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation will result in returning list of all addresses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostalAddress'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party not found
+    post:
+      tags:
+        - developers
+      summary: adds a address for the party
+      operationId: addAddress
+      description: Adds an address to the system
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party for which the operation is performed
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: address added
+        '400':
+          description: 'invalid input, object invalid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostalAddress'
+        description: Address to add
+  '/parties{partyID}/addresses{addressID}':
+    put:
+      tags:
+        - developers
+      summary: replaces address
+      operationId: setAddress
+      description:
+        By passing in the key of a party and address , you can replace address for the party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: addressID
+          in: path
+          description: ID of address that is being updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: address replaced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Party'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party or the Address not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostalAddress'
+        description: To replace the existing address
+    patch:
+      tags:
+        - developers
+      summary: updates address for a party
+      operationId: updateAddress
+      description: |
+        By passing in the key of a party and address, you can update a party address
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: addressID
+          in: path
+          description: ID of address that is being updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostalAddress'
+        '400':
+          description: Invalid ID supplied for the Party
+        '404':
+          description: Party or the Address not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/PostalAddress'primar
+    delete:
+      tags:
+        - developers
+      summary: delete an address for the party identified by the party ID and address ID
+      operationId: deleteAddress
+      description: |
+        By passing in the key of a party and for the address, you can delete an address belonging to the party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party for which the operation is performed
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: addressID
+          in: path
+          description: ID of address to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation will return list of all phonenumbers after deletion
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostalAddress'
+        '400':
+          description: Invalid ID supplied for either party or address
+        '404':
+          description: Party or Address not found
+
+  '/parties{partyID}/emails':
+    get:
+      tags:
+        - developers
+      summary: gets all emails for the party
+      operationId: getEmails
+      description: |
+        By passing in the key of a party , you can reterive a party emails
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party whose emails are requested
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation will result in returning list of all emails
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmailAddress'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party not found
+    post:
+      tags:
+        - developers
+      summary: adds an email for the party
+      operationId: addEmail
+      description: Adds an email to the system
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party for which the operation is performed
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: email added
+        '400':
+          description: 'invalid input, object invalid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailAddress'
+        description: Email to add
+  '/parties{partyID}/emails{emailID}':
+    put:
+      tags:
+        - developers
+      summary: replaces email
+      operationId: setEmail
+      description:
+        By passing in the key of a party and email, you can replace email for the party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: emailID
+          in: path
+          description: ID of email that is being updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: email replaced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailAddress'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Party or the Email not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailAddress'
+        description: New email to replace the old email
+    patch:
+      tags:
+        - developers
+      summary: updates email for a party
+      operationId: updateEmail
+      description: |
+        By passing in the key of a party and email, you can update an email
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: emailID
+          in: path
+          description: ID of email that is being updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailAddress'
+        '400':
+          description: Invalid ID supplied for the Party
+        '404':
+          description: Party or the email not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailAddress'
+    delete:
+      tags:
+        - developers
+      summary: delete an email for the party identified by the party ID and email ID
+      operationId: deleteEmail
+      description: |
+        By passing in the key of a party and for the email, you can delete an email belonging to the party
+      parameters:
+        - name: partyID
+          in: path
+          description: ID of party for which the operation is performed
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: emailID
+          in: path
+          description: ID of email to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation will return list of all emails after deletion
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmailAddress'
+        '400':
+          description: Invalid ID supplied for either party or email
+        '404':
+          description: Party or Email not found
+
+components:
+  requestBodies:
+    Party:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Party'
+      description: Party object that needs to be added to the store
+      required: true
+    PhoneNumber:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - caseID
+            properties:
+              caseID:
+                type: string
+                example: 'CA1234'
+              phoneNumber:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PhoneNumber'
+      description: Phonenumber to be added
+      required: true
+    PostalAddress:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - caseID
+            properties:
+              caseID:
+                type: string
+                example: 'CA1234'
+              postalAddress:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostalAddress'
+      description: Party's addresses
+      required: true
+    EmailAddress:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - caseID
+            properties:
+              caseID:
+                type: string
+                example: 'CA1234'
+              postalAddress:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmailAddress'
+      description: Party's email addresses
+      required: true
+  schemas:
+    Party:
+      type: object
+      required:
+        - partyID
+      properties:
+        partyID:
+          type: integer
+          format: int64
+          example: 1234
+        caseID:
+          type: integer
+          format: int64
+          example: 33334452
+        emailAddresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailAddress'
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+        postalAddresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostalAddress'
+    EmailAddress:
+      required:
+        - emailAddressID
+        - emailAddress
+      properties:
+        emailAddressID:
+          type: integer
+          format: int64
+          example: 1234
+        caseID:
+          type: integer
+          format: int64
+          example: 33334452
+        emailAddress:
+          type: string
+          format: email
+          example: 'joe.developer@prudential.com'
+      type: object
+    PhoneNumber:
+      required:
+        - phoneNumberID
+        - countryCallingCode
+        - localAreaCode
+        - localPhoneNumber
+        - extension
+        - type
+        - country
+      properties:
+        phoneNumberID:
+          type: integer
+          format: int64
+          example: 1234
+        caseID:
+          type: integer
+          format: int64
+          example: 33334452
+        countryCallingCode:
+          type: string
+          example: '1'
+        localAreaCode:
+          type: string
+          example: '908'
+        localPhoneNumber:
+          type: string
+          example: '867-5309'
+        extension:
+          type: string
+          example: '3456'
+        type:
+          type: string
+          example: 'Home'
+      type: object
+    PostalAddress:
+      required:
+        - postaladdressID
+        - caseID
+        - street1
+        - city
+        - state
+      properties:
+        postaladdressID:
+          type: integer
+          format: int64
+          example: 1234
+        caseID:
+          type: integer
+          format: int64
+          example: 33334452
+        street1:
+          type: string
+          example: '100 South Street'
+        street2:
+          type: string
+          example: 'Main Building'
+        street3:
+          type: string
+          example: ''
+        city:
+          type: string
+          example: 'New York'
+        state:
+          type: string
+          example: 'New York'
+        country:
+          type: string
+          example: 'USA'
+        addressType:
+          type: string
+          example: 'Primary'
+        effectiveDate:
+          type: string
+          example: '20181205'
+        appliedPolicies:
+          type: array
+          items:
+            type: string
+            example: "https://api.prudential.com/v1/policies{4567}"
+      type: object
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
