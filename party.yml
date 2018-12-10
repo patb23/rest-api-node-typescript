@@ -317,6 +317,8 @@ paths:
                   $ref: '#/components/schemas/PhoneNumber'
         '400':
           description: Invalid ID supplied for either party or phone
+        '403':
+          description: 
         '404':
           description: Party or Phonenumber not found
 

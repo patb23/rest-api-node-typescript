@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 
 export const PartySchema = new Schema({
 
-    partyID: {type: 'integer', format: 'int64', example: 1234},
-    caseID: {type: 'integer', format: 'int64', example: 33334452},
+    partyID: {type: Number, format: 'int64', example: 1234},
+    caseID: {type: Number, format: 'int64', example: 33334452},
     phoneNumbers:
         {
             type: [PhoneSchema],
